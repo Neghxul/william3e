@@ -1,0 +1,270 @@
+---
+import "../styles/global.css";
+
+const momTasks = [
+  "Abrir la tienda",
+  "Revisar productos",
+  "Apoyar al equipo",
+  "Atender clientes",
+  "Resolver un problema",
+  "Cerrar con reporte",
+];
+
+const momFacts = [
+  ["Equipo", "Organiza a las personas para que sepan qué hacer."],
+  ["Tienda", "Revisa orden, limpieza, anaqueles y precios."],
+  ["Clientes", "Ayuda cuando alguien busca algo o tiene una duda."],
+  ["Números", "Cuida caja, inventario, metas y reportes."],
+];
+
+const stackLayers = [
+  ["Pantalla", "Lo que vemos y tocamos: botones, colores y dibujos."],
+  ["Cerebro", "La parte que decide qué pasa cuando hacemos clic."],
+  ["Memoria", "El lugar donde la app guarda información importante."],
+];
+
+const sharedSkills = ["Organizan", "Ayudan", "Resuelven", "Trabajan en equipo"];
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Presentación interactiva para explicar a un niño el trabajo de mamá y papá."
+    />
+    <title>El trabajo de mis papás</title>
+  </head>
+  <body>
+    <main class="stage" data-app>
+      <div class="aurora" aria-hidden="true"></div>
+      <div class="cursor-light" data-cursor-light aria-hidden="true"></div>
+
+      <nav class="topbar" aria-label="Controles de presentación">
+        <button class="icon-btn" data-action="prev" type="button" aria-label="Anterior">
+          <span aria-hidden="true">‹</span>
+        </button>
+        <div class="progress" aria-label="Progreso">
+          <span data-progress></span>
+        </div>
+        <button class="icon-btn" data-action="fullscreen" type="button" aria-label="Pantalla completa">
+          <span aria-hidden="true">⛶</span>
+        </button>
+      </nav>
+
+      <section class="slide hero is-active" data-slide="intro">
+        <img class="hero-art" src="/assets/hero-family.png" alt="" loading="eager" />
+        <div class="hero-copy" data-reveal>
+          <h1><span>El trabajo de</span><span>mamá y papá</span></h1>
+          <p>Cuidar una tienda. Construir tecnología. Trabajar en equipo.</p>
+        </div>
+        <div class="choice-row" data-reveal>
+          <button class="choice mom" type="button" data-jump="mom">
+            <span class="choice-mark" aria-hidden="true">01</span>
+            <strong>Mamá</strong>
+            <small>Líder de tienda en Bara</small>
+          </button>
+          <button class="choice dad" type="button" data-jump="dad">
+            <span class="choice-mark" aria-hidden="true">02</span>
+            <strong>Papá</strong>
+            <small>Creador de apps</small>
+          </button>
+        </div>
+      </section>
+
+      <section class="slide store" data-slide="mom">
+        <div class="split">
+          <img class="panel-art" src="/assets/store.png" alt="" loading="eager" data-float />
+          <div class="content" data-reveal>
+            <p class="kicker">Mamá</p>
+            <h2>Líder de tienda en Bara</h2>
+            <p>
+              Bara es una tienda de conveniencia para surtir la despensa del hogar con productos de calidad
+              a precios accesibles. Una líder de tienda ayuda a que todo funcione bien cada día.
+            </p>
+            <div class="fact-grid">
+              {
+                momFacts.map(([title, text], index) => (
+                  <button class="fact" type="button" data-toggle>
+                    <span>{index + 1}</span>
+                    <strong>{title}</strong>
+                    <small>{text}</small>
+                  </button>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide photo-story" data-slide="momReal">
+        <div class="photo-layout" data-reveal>
+          <figure class="photo-slot">
+            <img src="/assets/real-store.jpg" alt="Espacio para foto real del trabajo de mamá" />
+            <figcaption>Foto de mamá</figcaption>
+          </figure>
+          <div class="photo-copy">
+            <p class="kicker">En la vida real</p>
+            <h2>La tienda es como un equipo de fútbol</h2>
+            <p>
+              Hay productos, clientes, horarios, caja y muchas decisiones pequeñas. Mamá ayuda a que todas
+              las jugadas salgan en orden.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide mission" data-slide="momMission">
+        <div class="mission-layout" data-reveal>
+          <div class="content">
+            <p class="kicker">Mini misión de mamá</p>
+            <h2>Un día en la tienda</h2>
+            <p>Toca las tareas para completar el día. Cada tarea ayuda a que una familia encuentre lo que necesita.</p>
+            <div class="task-board" data-mom-tasks>
+              {momTasks.map((task) => <button class="task" type="button">{task}</button>)}
+            </div>
+            <div class="badge" data-mom-badge>0 de 6 tareas listas</div>
+          </div>
+          <div class="store-scene" aria-hidden="true">
+            <div class="store-sign">BARA</div>
+            <div class="shelf-wall">
+              <div class="shelf-row">
+                <span></span><span></span><span></span><span></span><span></span>
+              </div>
+              <div class="shelf-row">
+                <span></span><span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+            <svg class="shopping-cart" viewBox="0 0 260 190" role="img" aria-label="Carrito de supermercado">
+              <path class="cart-handle" d="M32 36h34l22 82h113" />
+              <path class="cart-basket" d="M76 62h148l-20 72H94z" />
+              <path class="cart-grid" d="M105 70l8 55M139 70l3 55M174 70l-5 55M84 91h128M89 114h116" />
+              <circle class="cart-wheel" cx="108" cy="158" r="16" />
+              <circle class="cart-wheel" cx="190" cy="158" r="16" />
+              <path class="cart-spark" d="M222 35l12-18M232 51l22-2M211 26l-2-22" />
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide code" data-slide="dad">
+        <div class="split reverse">
+          <img class="panel-art" src="/assets/code.png" alt="" loading="eager" data-float />
+          <div class="content" data-reveal>
+            <p class="kicker">Papá</p>
+            <h2>Creador de apps</h2>
+            <p>
+              Papá crea aplicaciones y páginas. Una app necesita una pantalla bonita, un cerebro que piense
+              y una memoria para guardar cosas.
+            </p>
+            <div class="stack">
+              {
+                stackLayers.map(([title, text]) => (
+                  <button class="layer" type="button" data-toggle>
+                    <strong>{title}</strong>
+                    <small>{text}</small>
+                  </button>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide photo-story code-real" data-slide="dadReal">
+        <div class="photo-layout reverse" data-reveal>
+          <figure class="photo-slot">
+            <img src="/assets/real-code.jpg" alt="Espacio para foto real del trabajo de papá" />
+            <figcaption>Foto de papá</figcaption>
+          </figure>
+          <div class="photo-copy">
+            <p class="kicker">En la vida real</p>
+            <h2>Una app es como un robot ayudante</h2>
+            <p>
+              Tiene cara para hablar con nosotros, cerebro para responder y memoria para recordar lo importante.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide mission" data-slide="dadMission">
+        <div class="mission-layout reverse" data-reveal>
+          <div class="content lab">
+            <p class="kicker">Mini misión de papá</p>
+            <h2>Construye una app</h2>
+            <p>Activa las tres piezas. Cuando trabajan juntas, la app cobra vida.</p>
+            <div class="app-lab" data-app-lab>
+              <button class="piece" type="button" data-piece="pantalla">Pantalla</button>
+              <button class="piece" type="button" data-piece="cerebro">Cerebro</button>
+              <button class="piece" type="button" data-piece="memoria">Memoria</button>
+            </div>
+          </div>
+          <div class="phone" data-phone>
+            <div class="phone-top"></div>
+            <div class="phone-card" data-phone-card>Toca las piezas</div>
+            <div class="app-icons" aria-hidden="true">
+              <span></span><span></span><span></span><span></span>
+            </div>
+            <div class="phone-line"></div>
+            <div class="phone-line short"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide finale" data-slide="finale">
+        <div class="final-wrap" data-reveal>
+          <p class="kicker">Cierre</p>
+          <h2>¿Qué tienen en común?</h2>
+          <div class="compare">
+            <article>
+              <strong>Mamá lidera una tienda</strong>
+              <p>Organiza personas, productos y clientes para que todo salga bien.</p>
+            </article>
+            <article>
+              <strong>Papá crea tecnología</strong>
+              <p>Organiza pantallas, datos y servidores para resolver problemas.</p>
+            </article>
+          </div>
+          <div class="skill-strip" aria-label="Habilidades en común">
+            {sharedSkills.map((skill) => <span>{skill}</span>)}
+          </div>
+          <div class="bridge" aria-hidden="true">
+            <span>Tienda</span>
+            <i></i>
+            <span>Familia</span>
+            <i></i>
+            <span>Apps</span>
+          </div>
+          <p class="big-line">Los dos usan paciencia, creatividad y trabajo en equipo.</p>
+          <button class="restart" type="button" data-action="restart">Empezar otra vez</button>
+        </div>
+      </section>
+
+      <section class="slide end-choice" data-slide="endChoice">
+        <div class="final-wrap" data-reveal>
+          <p class="kicker">Listo</p>
+          <h2>Ya terminamos esta parte</h2>
+          <p data-end-message>Ahora puedes regresar al inicio y elegir el otro trabajo.</p>
+          <div class="choice-row end-actions">
+            <button class="choice" type="button" data-action="restart">
+              <span class="choice-mark" aria-hidden="true">↺</span>
+              <strong>Inicio</strong>
+              <small>Elegir mamá o papá</small>
+            </button>
+            <button class="choice" type="button" data-jump="finale" data-final-button disabled>
+              <span class="choice-mark" aria-hidden="true">✓</span>
+              <strong>Cierre</strong>
+              <small>Ver qué tienen en común</small>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <button class="next" data-action="next" type="button">Siguiente</button>
+      <div class="spark-layer" data-sparks aria-hidden="true"></div>
+    </main>
+
+    <script src="../scripts/presentation.ts"></script>
+  </body>
+</html>
